@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .method-img {
-      width: 300px;
+      width: 250px;
       height: auto;
       border-radius: 6px;
       margin-right: 10px;
@@ -17,14 +17,22 @@
     }
     .inline-images {
       display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       gap: 1rem;
-      flex-wrap: wrap;
     }
     .large-img {
-      width: 400px;
+      width: 100%;
+      max-width: 700px;
       height: auto;
       border-radius: 6px;
       margin-bottom: 1rem;
+    }
+    .poster-img {
+      width: 90%;
+      height: auto;
+      border-radius: 6px;
+      margin: 1rem 0;
     }
   </style>
 </head>
@@ -62,27 +70,25 @@
     <section class="method-section">
       <h3>Methodology</h3>
       <p>
-        The MILP formulation minimized total cost over a scheduling horizon. The core objective function is:
+        The MILP formulation minimized total energy cost over a 24-hour scheduling horizon. The objective function was:
       </p>
       <p style="font-family: monospace;">
-        Minimize: &sum;<sub>t</sub> ( C<sub>grid</sub>(t) * P<sub>grid</sub>(t) + C<sub>charge</sub> * P<sub>ch</sub>(t) + C<sub>discharge</sub> * P<sub>dis</sub>(t) )
+        Minimize: ∑<sub>t</sub> (C<sub>grid</sub>(t) · P<sub>grid</sub>(t) + C<sub>ch</sub> · P<sub>ch</sub>(t) + C<sub>dis</sub> · P<sub>dis</sub>(t))
       </p>
-      <p>
-        Subject to constraints:
-      </p>
+      <p>Subject to constraints:</p>
       <ul>
-        <li>Energy balance: P<sub>load</sub>(t) = P<sub>grid</sub>(t) + P<sub>dis</sub>(t) - P<sub>ch</sub>(t) - P<sub>PV</sub>(t)</li>
-        <li>Battery state of charge (SOC) dynamics</li>
-        <li>Power limits and PV generation availability</li>
+        <li><strong>Power balance:</strong> P<sub>load</sub>(t) = P<sub>grid</sub>(t) + P<sub>dis</sub>(t) - P<sub>ch</sub>(t) - P<sub>PV</sub>(t)</li>
+        <li><strong>Battery SOC dynamics:</strong> SOC(t+1) = SOC(t) + η<sub>ch</sub> · P<sub>ch</sub>(t) - P<sub>dis</sub>(t)/η<sub>dis</sub></li>
+        <li><strong>System limits:</strong> Generation, storage, and grid transaction limits</li>
       </ul>
       <p>
-        A hierarchical strategy separated long-term scheduling (macro level) from short-term adjustments (micro level), improving computational efficiency.
+        A hierarchical strategy separated macro-scheduling (daily optimization) from micro-adjustments (short-term response), enhancing computational scalability.
       </p>
     </section>
 
     <section class="method-section">
       <h3>Test Validation</h3>
-      <p>Simulation data was analyzed to verify the algorithm's robustness.</p>
+      <p>Validation was carried out using real load and solar data to evaluate algorithmic performance under different scenarios.</p>
 
       <h4>PV, Load, and Price Inputs</h4>
       <div class="inline-images">
@@ -94,27 +100,26 @@
       <h4>1. Generation Analysis</h4>
       <img src="milp-generation.jpg" alt="PV Generation Change" class="large-img">
       <p>
-        When PV generation increased from 300 kWh to 500 kWh, cost savings increased significantly due to reduced grid dependence. The algorithm successfully captured the economic benefits of higher renewable penetration.
+        Increasing PV generation from 300 kWh to 500 kWh significantly improved profit margins by reducing dependence on costly grid imports, confirming the economic benefits of enhanced renewable penetration.
       </p>
 
       <h4>2. Charging/Discharging Cost Optimization</h4>
       <img src="milp-charging.jpg" alt="Battery Cost Validation" class="large-img">
       <p>
-        Charging and discharging actions were aligned with the dynamic tariff structure, demonstrating that cost functions were correctly applied and reflected in optimized dispatch.
+        Charging and discharging schedules adapted to the time-varying tariff signals. The optimization effectively shifted loads to low-tariff periods, minimizing overall cost.
       </p>
 
       <h4>3. Energy Storage System (ESS) Contribution</h4>
       <img src="milp-ess.jpg" alt="ESS Effect" class="large-img">
       <p>
-        With ESS installed, the system optimized energy arbitrage across low and high tariff periods, generating additional revenue. The operation also helped minimize load curtailment.
+        The ESS enabled energy arbitrage and improved load matching, reducing curtailment and generating higher revenues. The SOC schedule supported grid flexibility and reliability.
       </p>
     </section>
 
     <section>
       <h3>Poster</h3>
-      <object data="milo-poster.jpg" type="application/pdf" width="60%" height="400px">
-        <p>Your browser does not support PDFs. <a href="milo-poster.pdf">Download the poster</a>.</p>
-      </object>
+      <img src="milo-poster.jpg" alt="Poster Image" class="poster-img">
+      <p><a href="milo-poster.pdf" target="_blank">📄 Download the full poster (PDF)</a></p>
     </section>
 
     <section>
