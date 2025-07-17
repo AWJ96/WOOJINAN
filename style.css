@@ -36,17 +36,6 @@ footer {
   color: #999;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.profile-pic {
-  width: 120px;
-  height: auto;
-  border-radius: 10px;
-  flex-shrink: 0;
+#about p {
+  text-align: justify;
 }
