@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inductive Vehicle Project – Woo Jin, An</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .method-img {
+      width: 160px;
+      height: auto;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    .method-section {
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -32,6 +44,43 @@
         <li>Fabricated and debugged PCBs, addressing signal noise and interference through waveform analysis</li>
         <li>Tested performance on complex curved tracks and optimized stability and responsiveness</li>
       </ul>
+    </section>
+
+    <section>
+      <h3>Demo</h3>
+      <video width="480" controls>
+        <source src="buggy-video.mov" type="video/quicktime">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section class="method-section">
+      <h3>Methodology</h3>
+
+      <h4>Motor & Gate Driver</h4>
+      <div>
+        <img src="gatedriver.jpg" alt="Gate Driver PCB" class="method-img">
+        <img src="motor.jpg" alt="DC Motor" class="method-img">
+      </div>
+      <p>
+        A brushed DC motor was driven using a custom gate driver circuit, enabling variable speed control through PWM modulation. The gate driver was manually debugged to handle current surges and prevent back-EMF spikes.
+      </p>
+
+      <h4>Sensor & PCB Design</h4>
+      <div>
+        <img src="sensor.jpg" alt="Inductive Sensor" class="method-img">
+        <img src="sensor-eagle.jpg" alt="Sensor PCB Layout" class="method-img">
+      </div>
+      <p>
+        The vehicle followed the track using inductive sensors positioned under the chassis. A custom PCB was designed in Eagle to host the analog front-end and filter circuits that processed sensor outputs before feeding them into the MCU.
+      </p>
+    </section>
+
+    <section>
+      <h3>Code</h3>
+      <p>
+        📄 <a href="buggy-code.pdf" target="_blank">View Control Algorithm and Embedded Code (PDF)</a>
+      </p>
     </section>
   </main>
 
