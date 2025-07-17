@@ -1,44 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project – Woo Jin, An</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>Project</h1>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
-  </header>
+<main>
+  <section>
+    <h2>A Microgrid Approach to Energy Cost and Emission Reduction for Sustainable Port Operations</h2>
+    <p><strong>Institution:</strong> Newcastle University & Singapore Institute of Technology<br>
+       <strong>In collaboration with:</strong> Power Automation Pte Ltd & NUS (National University of Singapore)<br>
+       <strong>Supervisor:</strong> Dr. Tan Kuan Tak<br>
+       <strong>Tools & Techniques:</strong> Python, MILP, Hierarchical Optimization, ESS, Solar PV, HOMER</p>
 
-  <main>
-    <section>
-      <h2>A Microgrid Approach to Energy Cost and Emission Reduction for Sustainable Port Operations</h2>
-      <p><strong>Institution:</strong> Newcastle University & Singapore Institute of Technology<br>
-         <strong>In collaboration with:</strong> Power Automation Pte Ltd & NUS (National University of Singapore)<br>
-         <strong>Supervisor:</strong> Dr. Tan Kuan Tak<br>
-         <strong>Tools & Techniques:</strong> Python, MILP, Hierarchical Optimization, ESS, Solar PV, HOMER</p>
+    <p>
+      This project developed a Python-based energy management system for <strong>Jurong Port</strong> to reduce operational costs and carbon emissions through a microgrid architecture. A hierarchical MILP algorithm managed grid interaction, energy storage, and load shedding, integrating real-world solar PV data.
+    </p>
 
-      <p>
-        This project developed a Python-based energy management system for <strong>Jurong Port</strong> to reduce operational costs and carbon emissions through a microgrid architecture. A hierarchical MILP algorithm managed grid interaction, energy storage, and load shedding, integrating real-world solar PV data.
-      </p>
+    <h3>Key Contributions</h3>
+    <ul>
+      <li>Developed and validated a multi-layer MILP optimization algorithm</li>
+      <li>Achieved up to <strong>60% grid independence</strong> via solar integration</li>
+      <li>Realized cost savings exceeding <strong>$15,000</strong> using ESS</li>
+      <li>Benchmarked results against HOMER software and peer models</li>
+      <li>Exposed scheduling-performance gaps between offline and online MPC control</li>
+    </ul>
+  </section>
 
-      <h3>Key Contributions</h3>
+  <section>
+    <h3>Methodology</h3>
+    <p>
+      A Mixed-Integer Linear Programming (MILP) formulation was used to minimize operational cost and emissions under constraints of energy balance and component capacity. The optimization objective was:
+    </p>
+    <p>
+      <code>
+      Minimize: &nbsp; ∑<sub>t</sub> (C<sub>grid</sub>·P<sub>grid</sub>(t) + C<sub>ess</sub>·P<sub>ess</sub>(t) + C<sub>shed</sub>·P<sub>load,shed</sub>(t))
+      </code>
+    </p>
+    <p>
+      Subject to constraints:
       <ul>
-        <li>Developed and validated a multi-layer MILP optimization algorithm</li>
-        <li>Achieved up to <strong>60% grid independence</strong> via solar integration</li>
-        <li>Realized cost savings exceeding <strong>$15,000</strong> using ESS</li>
-        <li>Benchmarked results against HOMER software and peer models</li>
-        <li>Exposed scheduling-performance gaps between offline and online MPC control</li>
+        <li>Power balance: P<sub>grid</sub>(t) + P<sub>ess</sub>(t) + P<sub>pv</sub>(t) = P<sub>load</sub>(t)</li>
+        <li>ESS limits: SOC<sub>min</sub> ≤ SOC(t) ≤ SOC<sub>max</sub></li>
+        <li>Load shedding allowed only for non-critical loads</li>
       </ul>
-    </section>
-  </main>
+      The MILP solver schedules grid import/export, ESS charging/discharging, and load curtailment.
+    </p>
+  </section>
 
-  <footer>
-    <p>© 2025 Woo Jin, An</p>
-  </footer>
-</body>
-</html>
+  <section>
+    <h3>Test Validation</h3>
+    <p>Validation was performed using real solar and load profiles. The following cases highlight the algorithm’s response to varying system conditions.</p>
+
+    <h4>PV Output and Load</h4>
+    <img src="milp-pv.jpg" alt="Solar PV Profile" width="350">
+    <img src="milp-load.jpg" alt="Load Profile" width="350">
+    <img src="milp-price.jpg" alt="Dynamic Pricing" width="350">
+    <p>Day-ahead pricing and PV forecasts were inputs to the scheduler.</p>
+
+    <h4>1. Generation Impact (300kWh vs 500kWh)</h4>
+    <img src="milp-generation.jpg" alt="PV Generation Comparison" width="500">
+    <p>Higher generation (500kWh) improved self-sufficiency and profit margin by enabling more internal supply and less grid dependency.</p>
+
+    <h4>2. Charging/Discharging Optimization</h4>
+    <img src="milp-charging.jpg" alt="ESS Charge/Discharge Cost Handling" width="500">
+    <p>The algorithm successfully minimized cost by charging during low-tariff hours and discharging during peak tariffs.</p>
+
+    <h4>3. ESS Operation</h4>
+    <img src="milp-ess.jpg" alt="ESS Behavior" width="500">
+    <p>ESS presence increased grid independence and allowed revenue generation via arbitrage. The SOC trajectory respected bounds and followed optimal charge/discharge cycles.</p>
+  </section>
+
+  <section>
+    <h3>Poster</h3>
+    <p><a href="milp-poster.pdf" target="_blank">📄 View Project Poster (PDF)</a></p>
+  </section>
+
+  <section>
+    <h3>Code</h3>
+    <p><a href="milp-code.pdf" target="_blank">📄 View MILP Python Code (PDF)</a></p>
+  </section>
+</main>
