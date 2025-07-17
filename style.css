@@ -50,27 +50,3 @@ footer {
   border-radius: 10px;
   flex-shrink: 0;
 }
-
-.hero-text {
-  flex-grow: 1;
-  min-width: 200px;
-  max-width: 100%;
-}
-
-.hero-text h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-.hero-text .subtitle {
-  margin-top: 0.3rem;
-  margin-bottom: 0.7rem;
-  font-size: 1rem;
-  color: #666;
-}
-
-.hero-text nav a {
-  margin-right: 15px;
-  font-weight: bold;
-  color: #0056b3;
-}
