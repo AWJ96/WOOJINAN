@@ -15,6 +15,17 @@
     .method-section {
       margin-bottom: 2rem;
     }
+    .inline-images {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .large-img {
+      width: 600px;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -51,13 +62,21 @@
     <section class="method-section">
       <h3>Methodology</h3>
       <p>
-        The MILP formulation minimized cost and emissions using real solar generation data. The objective function was:
+        The MILP formulation minimized total cost over a scheduling horizon. The core objective function is:
       </p>
       <p style="font-family: monospace;">
-        Minimize: &sum;(Grid_Cost + Battery_Cost + Emissions_Cost - PV_Savings)
+        Minimize: &sum;<sub>t</sub> ( C<sub>grid</sub>(t) * P<sub>grid</sub>(t) + C<sub>charge</sub> * P<sub>ch</sub>(t) + C<sub>discharge</sub> * P<sub>dis</sub>(t) )
       </p>
       <p>
-        Constraints included energy balance, storage dynamics, and PV generation limits. A hierarchical structure coordinated macro and local optimization layers. Offline scheduling was simulated in Python.
+        Subject to constraints:
+      </p>
+      <ul>
+        <li>Energy balance: P<sub>load</sub>(t) = P<sub>grid</sub>(t) + P<sub>dis</sub>(t) - P<sub>ch</sub>(t) - P<sub>PV</sub>(t)</li>
+        <li>Battery state of charge (SOC) dynamics</li>
+        <li>Power limits and PV generation availability</li>
+      </ul>
+      <p>
+        A hierarchical strategy separated long-term scheduling (macro level) from short-term adjustments (micro level), improving computational efficiency.
       </p>
     </section>
 
@@ -66,34 +85,36 @@
       <p>Simulation data was analyzed to verify the algorithm's robustness.</p>
 
       <h4>PV, Load, and Price Inputs</h4>
-      <div>
+      <div class="inline-images">
         <img src="milp-pv.jpg" alt="Solar PV Input" class="method-img">
         <img src="milp-load.jpg" alt="Load Input" class="method-img">
         <img src="milp-price.jpg" alt="Price Profile" class="method-img">
       </div>
 
       <h4>1. Generation Analysis</h4>
-      <img src="milp-generation.jpg" alt="PV Generation Change" class="method-img">
+      <img src="milp-generation.jpg" alt="PV Generation Change" class="large-img">
       <p>
-        When PV generation increased from 300 kWh to 500 kWh, cost savings increased significantly due to reduced grid dependence.
+        When PV generation increased from 300 kWh to 500 kWh, cost savings increased significantly due to reduced grid dependence. The algorithm successfully captured the economic benefits of higher renewable penetration.
       </p>
 
       <h4>2. Charging/Discharging Cost Optimization</h4>
-      <img src="milp-charging.jpg" alt="Battery Cost Validation" class="method-img">
+      <img src="milp-charging.jpg" alt="Battery Cost Validation" class="large-img">
       <p>
-        Charging and discharging schedules were validated to minimize battery operating costs while maintaining demand-supply balance.
+        Charging and discharging actions were aligned with the dynamic tariff structure, demonstrating that cost functions were correctly applied and reflected in optimized dispatch.
       </p>
 
       <h4>3. Energy Storage System (ESS) Contribution</h4>
-      <img src="milp-ess.jpg" alt="ESS Effect" class="method-img">
+      <img src="milp-ess.jpg" alt="ESS Effect" class="large-img">
       <p>
-        With ESS installed, revenue generation increased. The storage system enabled strategic load shifting, optimizing cost-efficiency during peak tariff hours.
+        With ESS installed, the system optimized energy arbitrage across low and high tariff periods, generating additional revenue. The operation also helped minimize load curtailment.
       </p>
     </section>
 
     <section>
       <h3>Poster</h3>
-      <embed src="milo-poster.pdf" type="application/pdf" width="100%" height="600px" />
+      <object data="milo-poster.pdf" type="application/pdf" width="100%" height="600px">
+        <p>Your browser does not support PDFs. <a href="milo-poster.pdf">Download the poster</a>.</p>
+      </object>
     </section>
 
     <section>
