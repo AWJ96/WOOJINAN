@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projects – Woo Jin, An</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+  .project-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .project-item img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+</style>
 </head>
 <body>
   <header>
@@ -17,18 +32,23 @@
   <main>
     <section>
       <h2>Selected Projects</h2>
-      <ul>
-        <li>
-          <a href="project-milp.html"><strong>Hierarchical Energy Management System Based on Hierarchical Optimization for Microgrid Community Economic
-Operation</strong></a><br>
-          Cost/emission reduction using Python-based MILP optimization with ESS and solar PV
-        </li>
-        <li>
-          <a href="project-milp.html"><strong>Self-Guided Inductive Vehicle with Embedded Control Systems </strong></a><br>
-          Autonomous inductive line-following vehicle using an Atmega16 microcontroller
-        </li>
-        <!-- Add more projects as needed -->
-      </ul>
+
+      <div class="project-item">
+        <img src="Jurong-port.png" alt="Jurong Port Microgrid Project">
+        <div>
+          <a href="project-milp.html"><strong>Hierarchical Energy Management System for Microgrid Operations</strong></a><br>
+          Cost/emission reduction using Python-based MILP optimization with ESS and solar PV.
+        </div>
+      </div>
+
+      <div class="project-item">
+        <img src="buggy.jpg" alt="Inductive Line-Following Buggy">
+        <div>
+          <a href="project-milp.html"><strong>Self-Guided Inductive Vehicle with Embedded Control Systems</strong></a><br>
+          Autonomous inductive line-following vehicle using an Atmega16 microcontroller with PD control and custom PCBs.
+        </div>
+      </div>
+
     </section>
   </main>
 
@@ -37,4 +57,3 @@ Operation</strong></a><br>
   </footer>
 </body>
 </html>
-
